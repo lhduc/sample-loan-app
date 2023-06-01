@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  database:
+    image: mysql:8
+    container_name: aspire.database
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER_USERNAME: 'test'
+      MYSQL_USER_PASSWORD: 'test'
+    volumes:
+      - .docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/database:/var/lib/mysql
+    restart: always
+    networks:
+      - app_network
+
+  app:
+    image: lehongduc87/sample-loan-app
+    container_name: aspire.app
+    ports:
+      - 82:80
+    restart: always
+    networks:
+      - app_network  
+
+networks:
+  app_network:
+    driver: bridge
+

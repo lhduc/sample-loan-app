@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS loan_app;
+
+CREATE USER 'lhduc'@'%' IDENTIFIED BY 'lhduc';
+GRANT ALL PRIVILEGES ON `loan_app`.* TO 'lhduc'@'%';
+
+FLUSH PRIVILEGES;
